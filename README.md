@@ -17,7 +17,7 @@ Details for Milestone are available on Canvas (left sidebar, Course Project) or 
 
 ## Team Members
 
-- Person 1: Grant Hihn, learning computer science fundamentals after a pure math degree.
+- Person 1: Grant Hihn, learning computer science fundamentals after a pure math degree. Loves to ski.
 - Person 2: one sentence about you!
 - Person 3: one sentence about you!
 
