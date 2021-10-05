@@ -18,7 +18,7 @@ Details for Milestone are available on Canvas (left sidebar, Course Project) or 
 ## Team Members
 
 - Person 1: Grant Hihn, learning computer science fundamentals after a pure math degree. Loves to ski.
-- Person 2: one sentence about you!
+- Person 2: Eddy Zhang, third year computer science student.
 - Person 3: one sentence about you!
 
 ## Images
@@ -29,7 +29,6 @@ Details for Milestone are available on Canvas (left sidebar, Course Project) or 
 
 ## References
 
-{Add your stuff here}
-
+[Dataset](https://insights.stackoverflow.com/survey/)
 
 
