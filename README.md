@@ -25,9 +25,7 @@ The 2021 Stack Overflow developer survey contains responses of 83439 software de
 
 ## Images
 
-{You can use this area for any images you want to include}
-
-<img src ="images/logo-stackoverflow.png" width="300px" height = "100px">
+<img src ="images/logo-stackoverflow.png" width="300px" height = "80px">
 
 ## References
 
