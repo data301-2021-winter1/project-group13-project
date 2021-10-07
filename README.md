@@ -9,7 +9,7 @@ Details for Milestone are available on Canvas (left sidebar, Course Project) or 
 
 ## Describe your topic/interest in about 150-200 words
 
-{Add your stuff here}
+Our interest is in the software development industry, the technologies and programming languages being used and in what combinations. Are there meaningful trends between languages and salaries? Certain nations using a language more so than other nations? As well as the educational background of these developers. Are self taught developers finding the same success as those that went on to higher education? 
 
 ## Describe your dataset in about 150-200 words
 
