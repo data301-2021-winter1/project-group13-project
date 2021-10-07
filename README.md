@@ -21,7 +21,7 @@ The 2021 Stack Overflow developer survey contains responses of 83439 software de
 
 - Person 1: Grant Hihn, learning computer science fundamentals after a pure math degree. Loves to ski.
 - Person 2: Eddy Zhang, third year computer science student.
-- Person 3: one sentence about you!
+- Person 3: Tanner Bjorgan, I am a second year computer science student. I love to mess around and create things with technology. 
 
 ## Images
 
