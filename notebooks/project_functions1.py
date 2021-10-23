@@ -14,17 +14,18 @@ def dfCleaner(df):
     dfCleaned = df.copy().drop(['SOAccount','SOPartFreq','SurveyLength','SurveyEase'],axis=1)
     return dfCleaned
 
-def dfUserCount(df, progLang):
-    count = 0
-    iterDf = df
-    for index, row in iterDf.iterrows():
-        str_row = str(row[col])
-        list_row = str_row.split(";")
-        if (progLang in list_row):
-            count += 1
-    return count
 
 def dfLangCount(df, col):
+    ''' Takes in dataframe and column to count in the dataframe and returns a counter object
+        params
+        ------
+        df: dataframe
+        col: string
+
+        returns
+        -------
+        counter collections object
+     '''
     cnt = Counter()
     for index, row in df.iterrows():
         str_row = str(row[col])
