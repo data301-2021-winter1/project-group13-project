@@ -4,19 +4,32 @@ import os # to get to document and open it
 from collections import Counter
 
 def unprocessed(csvFile):
+    ''' A wrapped pandas function '''
     return pd.read_csv(csvFile)
 
-def load_and_process(csvFile):
-    lastThree = csvFile[-3:]
-    if(lastThree == 'zip'):
-        with zipfile.ZipFile('../data/raw/survey_results_public_2019.csv.zip') as myzip:
-            data2019 = myzip.open('survey_results_public_2019.csv')
-        df = pd.read_csv(data2019,dtype='unicode')
-    else:
-        df = pd.read_csv(csvFile)
+def load_and_process(fileString,year):
+    ''' Takes a filename and year and returns a dataframe
+        params
+        ------
+        fileString: String
+        year: int
 
-    dfCleaned = df.copy().drop(['SOAccount','SOPartFreq','SurveyLength','SurveyEase'],axis=1)
-    return dfCleaned
+        returns
+        -------
+        cleaned dataframe
+     '''
+    lastThree = fileString[-3:]
+    #should improve this line
+    dataFileString = 'survey_results_public_'+str(year)+'.csv'
+    if(lastThree == 'zip'):
+        with zipfile.ZipFile(fileString) as myzip:
+            data = myzip.open(dataFileString)
+        df = pd.read_csv(data,dtype='unicode')
+    else:
+        df = pd.read_csv(fileString)
+    #need to find common columns accross the dataframes for cleaning
+    #dfCleaned = df.copy().drop(['SOAccount','SOPartFreq','SurveyLength','SurveyEase'],axis=1)
+    return df
 
 
 def dfLangCount(df, col):
@@ -41,6 +54,3 @@ def dfLangCount(df, col):
 def countPrintLang(cnt,year):
     for lang in sorted(cnt):
         print(f"{cnt[lang]} people have worked with {lang} in {year} ")
-
-
-load_and_process('hello.zip')
