@@ -10,5 +10,14 @@ def loadCsvZipDf(csvFile):
 
 
 def dfCleaner(df):
-    dfCleaned = df.copy().drop(['SOAccount','SOPartFreq','NEWSOSites','SurveyLength','SurveyEase'],axis=1)
+    dfCleaned = df.copy().drop(['US_State','SOAccount','SOPartFreq','NEWSOSites','SurveyLength','SurveyEase'],axis=1)
     return dfCleaned
+
+def dfUserCount(progLang)
+    count = 0
+    for index, row in df.iterrows():
+        str_row = str(row['LanguageHaveWorkedWith'])
+        list_row = str_row.split(";")
+        if (progLang in list_row):
+            count += 1
+        return count
