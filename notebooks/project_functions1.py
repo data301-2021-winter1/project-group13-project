@@ -18,16 +18,16 @@ def dfUserCount(df, progLang):
     count = 0
     iterDf = df
     for index, row in iterDf.iterrows():
-        str_row = str(row['LanguageHaveWorkedWith'])
+        str_row = str(row[col])
         list_row = str_row.split(";")
         if (progLang in list_row):
             count += 1
     return count
 
-def dfLangCount(df):
+def dfLangCount(df, col):
     cnt = Counter()
     for index, row in df.iterrows():
-        str_row = str(row['LanguageHaveWorkedWith'])
+        str_row = str(row[col])
         list_row = str_row.split(";")
         for progLang in list_row:
             cnt[progLang] += 1
