@@ -3,17 +3,48 @@ import pandas as pd
 import os # to get to document and open it
 from collections import Counter
 
-def loadCsvZipDf(csvFile):
-    with zipfile.ZipFile('../data/raw/survey_results_public_2019.csv.zip') as myzip:
-        data2019 = myzip.open('survey_results_public_2019.csv')
-    df = pd.read_csv(data2019,dtype='unicode')
-    return df
+def unprocessed(csvFile):
+    ''' A wrapped pandas function '''
+    return pd.read_csv(csvFile)
 
+def load_and_process(fileString,year):
+    ''' Takes a filename and year and returns a dataframe
+        params
+        ------
+        fileString: String
+        year: int
 
-def dfCleaner(df):
-    dfCleaned = df.copy().drop(['SOAccount','SOPartFreq','SurveyLength','SurveyEase'],axis=1)
+        returns
+        -------
+        cleaned dataframe
+     '''
+
+    lastThree = fileString[-3:] #checking if should use read csv or open zipfile
+                                #then read
+
+    if(lastThree == 'zip'):
+        with zipfile.ZipFile(fileString) as myzip:
+            dataFileString = 'survey_results_public_'+str(year)+'.csv'
+            data = myzip.open(dataFileString)
+        df = pd.read_csv(data,dtype='unicode')
+    else:
+        df = pd.read_csv(fileString)
+    #need to find common columns accross the dataframes for cleaning
+    #check MgrIdiot Column
+    columnDrop = ['SOAccount','SOPartFreq','SurveyLength','SurveyEase',
+                    'SOVisitFreq','NEWOtherComms','Trans','OpSys','NEWSOSites',
+                    'NEWStuck','SOComm','NEWOtherComms','Accesibility','SOVisitTo',
+                    'SOFindAnswer','SOTimeSaved','SOHowMuchTime','MilitaryUS','SurveyTooLong'
+                    ,'SurveyEasy','Exercise','SurveyLong','QuestionsConfusing','QuestionsInteresting']
+
+    #errors='ignore' since all columns are not in each df
+    dfCleaned = (df.copy()
+                 .drop(columnDrop,axis=1,errors='ignore')
+                 .rename(columns={'LanguageHaveWorkedWith':'Programming Language'
+                                    ,'LanguageWorkedWith':'Programming Language'
+                                    ,'HaveWorkedLanguage':'Programming Language'} ,errors='ignore')
+                 )
     return dfCleaned
-
 
 def dfLangCount(df, col):
     ''' Takes in dataframe and column to count in the dataframe and returns a counter object
