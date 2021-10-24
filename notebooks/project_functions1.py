@@ -62,7 +62,8 @@ def dfLangCount(df, col):
         str_row = str(row[col])
         list_row = str_row.split(";")
         for progLang in list_row:
-            cnt[progLang] += 1
+            if progLang not in ['Nan','NaN','NAN','nan']:
+                cnt[progLang] += 1
     return cnt
 
 def countPrintLang(cnt,year):
