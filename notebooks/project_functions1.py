@@ -18,11 +18,13 @@ def load_and_process(fileString,year):
         -------
         cleaned dataframe
      '''
-    lastThree = fileString[-3:]
-    #should improve this line
-    dataFileString = 'survey_results_public_'+str(year)+'.csv'
+
+    lastThree = fileString[-3:] #checking if should use read csv or open zipfile
+                                #then read
+
     if(lastThree == 'zip'):
         with zipfile.ZipFile(fileString) as myzip:
+            dataFileString = 'survey_results_public_'+str(year)+'.csv'
             data = myzip.open(dataFileString)
         df = pd.read_csv(data,dtype='unicode')
     else:
@@ -35,10 +37,12 @@ def load_and_process(fileString,year):
                     'SOFindAnswer','SOTimeSaved','SOHowMuchTime','MilitaryUS','SurveyTooLong'
                     ,'SurveyEasy','Exercise','SurveyLong','QuestionsConfusing','QuestionsInteresting']
 
-    #errors='ignore' since all columns are not in each df    
+    #errors='ignore' since all columns are not in each df
     dfCleaned = (df.copy()
                  .drop(columnDrop,axis=1,errors='ignore')
-                 .rename(columns={'LanguageHaveWorkedWith':'Programming Language','LanguageWorkedWith':'Programming Language','HaveWorkedLanguage':'Programming Language'} ,errors='ignore')
+                 .rename(columns={'LanguageHaveWorkedWith':'Programming Language'
+                                    ,'LanguageWorkedWith':'Programming Language'
+                                    ,'HaveWorkedLanguage':'Programming Language'} ,errors='ignore')
                  )
     return dfCleaned
 
