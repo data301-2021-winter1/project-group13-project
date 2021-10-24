@@ -28,9 +28,19 @@ def load_and_process(fileString,year):
     else:
         df = pd.read_csv(fileString)
     #need to find common columns accross the dataframes for cleaning
-    #dfCleaned = df.copy().drop(['SOAccount','SOPartFreq','SurveyLength','SurveyEase'],axis=1)
-    return df
+    #check MgrIdiot Column
+    columnDrop = ['SOAccount','SOPartFreq','SurveyLength','SurveyEase',
+                    'SOVisitFreq','NEWOtherComms','Trans','OpSys','NEWSOSites',
+                    'NEWStuck','SOComm','NEWOtherComms','Accesibility','SOVisitTo',
+                    'SOFindAnswer','SOTimeSaved','SOHowMuchTime','MilitaryUS','SurveyTooLong'
+                    ,'SurveyEasy','Exercise','SurveyLong','QuestionsConfusing','QuestionsInteresting']
 
+    #errors='ignore' since all columns are not in each df    
+    dfCleaned = (df.copy()
+                 .drop(columnDrop,axis=1,errors='ignore')
+                 .rename(columns={'LanguageHaveWorkedWith':'Programming Language','LanguageWorkedWith':'Programming Language','HaveWorkedLanguage':'Programming Language'} ,errors='ignore')
+                 )
+    return dfCleaned
 
 def dfLangCount(df, col):
     ''' Takes in dataframe and column to count in the dataframe and returns a counter object
