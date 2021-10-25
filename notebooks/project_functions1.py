@@ -29,13 +29,17 @@ def load_and_process(fileString,year):
         df = pd.read_csv(data,dtype='unicode')
     else:
         df = pd.read_csv(fileString)
-    #need to find common columns accross the dataframes for cleaning
-    #check MgrIdiot Column
+
+    #Made genericish column drop for all dataframes
+    #genericish since the names are prodominantly from 2021 for time sake
     columnDrop = ['SOAccount','SOPartFreq','SurveyLength','SurveyEase',
                     'SOVisitFreq','NEWOtherComms','Trans','OpSys','NEWSOSites',
                     'NEWStuck','SOComm','NEWOtherComms','Accesibility','SOVisitTo',
                     'SOFindAnswer','SOTimeSaved','SOHowMuchTime','MilitaryUS','SurveyTooLong'
-                    ,'SurveyEasy','Exercise','SurveyLong','QuestionsConfusing','QuestionsInteresting']
+                    ,'SurveyEasy','Exercise','SurveyLong','QuestionsConfusing','QuestionsInteresting'
+                    ,'PlatformHaveWorkedWith','PlatformWantToWorkWith','WebframeHaveWorkedWith',
+                    'MiscTechWantToWorkWith','NEWCollabToolsHaveWorkedWith','ToolsTechWantToWorkWith',
+                    'Sexuality','Ethnicity']
 
     #errors='ignore' since all columns are not in each df
     dfCleaned = (df.copy()
@@ -61,7 +65,7 @@ def dfLangSalary(df,countObj):
 
     dfLangSalary = pd.DataFrame.from_dict(dictLangSalary,orient='index').reset_index()
     return dfLangSalary
-    
+
 def dfLangCount(df, col):
     ''' Takes in dataframe and column to count in the dataframe and returns a counter object
         params
