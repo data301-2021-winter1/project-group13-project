@@ -19,7 +19,6 @@ def load_and_process(csv_file):
         )    
     return df1
 
-def groupby_Edlevel(dfp):
+def groupby_EdLevel(dfp):
     df1 = dfp.groupby('EdLevel', as_index=False).sum()
     return df1
-
