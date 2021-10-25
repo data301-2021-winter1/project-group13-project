@@ -40,9 +40,9 @@ def load_and_process(fileString,year):
     #errors='ignore' since all columns are not in each df
     dfCleaned = (df.copy()
                  .drop(columnDrop,axis=1,errors='ignore')
-                 .rename(columns={'LanguageHaveWorkedWith':'Programming Language'
-                                    ,'LanguageWorkedWith':'Programming Language'
-                                    ,'HaveWorkedLanguage':'Programming Language'} ,errors='ignore')
+                 .rename(columns={'LanguageHaveWorkedWith':'ProgrammingLanguage'
+                                    ,'LanguageWorkedWith':'ProgrammingLanguage'
+                                    ,'HaveWorkedLanguage':'ProgrammingLanguage'} ,errors='ignore')
                  )
     return dfCleaned
 
