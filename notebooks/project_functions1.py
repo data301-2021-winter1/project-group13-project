@@ -46,6 +46,22 @@ def load_and_process(fileString,year):
                  )
     return dfCleaned
 
+def dfLangSalary(df,countObj):
+   # dictLangSalary = {"C++":[],'APL':[],'Assembly':[],'Bash/Shell':[],'C':[],'C#':[],
+    #                 'COBOL':[],'Clojure'}
+    dictLangSalary = {}
+    for k,v in countObj.items():
+        dictLangSalary[k] = []
+    for index, row in df.iterrows():
+        str_row = str(row['ProgrammingLanguage'])
+        list_row = str_row.split(";")
+        for progLang in list_row:
+            if progLang not in ['Nan','NaN','NAN','nan'] and row['ConvertedCompYearly'] not in ['nan']:
+                dictLangSalary[progLang].append(row['ConvertedCompYearly'])
+
+    dfLangSalary = pd.DataFrame.from_dict(dictLangSalary,orient='index').reset_index()
+    return dfLangSalary
+    
 def dfLangCount(df, col):
     ''' Takes in dataframe and column to count in the dataframe and returns a counter object
         params
