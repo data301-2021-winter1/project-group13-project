@@ -51,19 +51,36 @@ def load_and_process(fileString,year):
     return dfCleaned
 
 def dfLangSalary(df,countObj):
-   # dictLangSalary = {"C++":[],'APL':[],'Assembly':[],'Bash/Shell':[],'C':[],'C#':[],
+    ''' Takes in dataframe and counter object produce a dataframe of programming language to salary
+        and returns a counter object
+        params
+        ------
+        df: dataframe
+        col: counter object
+
+        returns
+        -------
+        dataframe
+     '''
+     #Samle of what the dictionary looks like before being loaded with salaries
+     # dictLangSalary = {"C++":[],'APL':[],'Assembly':[],'Bash/Shell':[],'C':[],'C#':[],
     #                 'COBOL':[],'Clojure'}
     dictLangSalary = {}
     for k,v in countObj.items():
         dictLangSalary[k] = []
     for index, row in df.iterrows():
         str_row = str(row['ProgrammingLanguage'])
-        list_row = str_row.split(";")
+        list_row = str_row.split(";") #splitting by delimiter to separate languages
         for progLang in list_row:
             if progLang not in ['Nan','NaN','NAN','nan'] and row['ConvertedCompYearly'] not in ['nan']:
                 dictLangSalary[progLang].append(row['ConvertedCompYearly'])
 
     dfLangSalary = pd.DataFrame.from_dict(dictLangSalary,orient='index').reset_index()
+    #Next lines are to transpose the data frame then make the column titles that of the first row
+    dfLangSalary = dfLangSalary.transpose()
+    dfLangSalary.columns = dfLangSalary.iloc[0]
+    dfLangSalary = dfLangSalary[1:]
+
     return dfLangSalary
 
 def dfLangCount(df, col):
