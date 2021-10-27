@@ -50,6 +50,44 @@ def load_and_process(fileString,year):
                  )
     return dfCleaned
 
+def dfAdjustColNames(dict):
+    ''' Takes a dictionary and returns a dataframe, where the column names,
+        are a transpose of a previous column of the dictionary
+        params
+        ------
+        df: dictionary
+
+        returns
+        -------
+        dataframe
+     '''
+    dfAdjusted = pd.DataFrame.from_dict(dict,orient='index').reset_index()
+    dfAdjusted = dfAdjusted.transpose()
+    dfAdjusted.columns = dfAdjusted.iloc[0]
+    dfAdjusted = dfAdjusted[1:]
+
+    return dfAdjusted
+
+def dfLangSalaryMean(df):
+    ''' Takes a dataframe and returns a dataframe of means of the columns
+        subtracting the overall mean of the dataframe
+        params
+        ------
+        df: DataFrame
+
+        returns
+        -------
+        DataFrame of mean of column minus mean of all columns
+     '''
+    assert df.size != 0, "Dataframe is empty"
+    meanDiffLang2021Dict = {}
+    for col in df:
+        meanDiff = df[col].mean() - df.mean().mean()
+        meanDiffLang2021Dict[col] = meanDiff
+
+    meanDiffLang2021Df = dfAdjustColNames(meanDiffLang2021Dict)
+    return meanDiffLang2021Df
+
 def dfLangSalary(df,countObj):
     ''' Takes in dataframe and counter object produce a dataframe of programming language to salary
         and returns a counter object
@@ -75,12 +113,7 @@ def dfLangSalary(df,countObj):
             if progLang not in ['Nan','NaN','NAN','nan'] and row['ConvertedCompYearly'] not in ['nan']:
                 dictLangSalary[progLang].append(row['ConvertedCompYearly'])
 
-    dfLangSalary = pd.DataFrame.from_dict(dictLangSalary,orient='index').reset_index()
-    #Next lines are to transpose the data frame then make the column titles that of the first row
-    dfLangSalary = dfLangSalary.transpose()
-    dfLangSalary.columns = dfLangSalary.iloc[0]
-    dfLangSalary = dfLangSalary[1:]
-
+    dfLangSalary = dfAdjustColNames(dictLangSalary)
     return dfLangSalary
 
 def dfLangCount(df, col):
