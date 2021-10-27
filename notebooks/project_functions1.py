@@ -39,7 +39,7 @@ def load_and_process(fileString,year):
                     ,'SurveyEasy','Exercise','SurveyLong','QuestionsConfusing','QuestionsInteresting'
                     ,'PlatformHaveWorkedWith','PlatformWantToWorkWith','WebframeHaveWorkedWith',
                     'MiscTechWantToWorkWith','NEWCollabToolsHaveWorkedWith','ToolsTechWantToWorkWith',
-                    'Sexuality','Ethnicity']
+                    'Sexuality','Ethnicity','WebframeWantToWorkWith']
 
     #errors='ignore' since all columns are not in each df
     dfCleaned = (df.copy()
