@@ -22,3 +22,11 @@ def load_and_process(csv_file):
 def groupby_EdLevel(dfp):
     df1 = dfp.groupby('EdLevel', as_index=False).sum()
     return df1
+
+def show_Percentage(dfp, plt):
+    total = len(dfp)
+    for p in plt.patches:
+        percentage = f'{100 * p.get_height() / total:.1f}%\n'
+        x = p.get_x() + p.get_width() / 2
+        y = p.get_height()
+        plt.annotate(percentage, (x, y), ha='center', va='center')
