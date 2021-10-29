@@ -141,3 +141,8 @@ def dfLangCount(df, col):
 def countPrintLang(cnt,year):
     for lang in sorted(cnt):
         print(f"{cnt[lang]} people have worked with {lang} in {year} ")
+
+def langPrintPercent(cnt,year):
+    total = sum(cnt.values())
+    for lang in sorted(cnt):
+        print(f"{round(((cnt[lang]/total)*100),2)}% people have worked with {lang} in {year} ")
