@@ -32,7 +32,8 @@ def load_and_process(fileString,year):
 
     #Made genericish column drop for all dataframes
     #genericish since the names are prodominantly from 2021 for time sake
-    columnDrop = ['SOAccount','SOPartFreq','SurveyLength','SurveyEase',
+    #Probably should use splices at this point
+    columnDrop = ['SOAccount','SOPartFreq','SurveyLength','SurveyEase','OrgSize',
                     'SOVisitFreq','NEWOtherComms','Trans','OpSys','NEWSOSites',
                     'NEWStuck','SOComm','NEWOtherComms','Accesibility','SOVisitTo',
                     'SOFindAnswer','SOTimeSaved','SOHowMuchTime','MilitaryUS','SurveyTooLong'
@@ -40,8 +41,10 @@ def load_and_process(fileString,year):
                     ,'PlatformHaveWorkedWith','PlatformWantToWorkWith','WebframeHaveWorkedWith',
                     'MiscTechWantToWorkWith','NEWCollabToolsHaveWorkedWith','ToolsTechWantToWorkWith',
                     'Sexuality','Ethnicity','WebframeWantToWorkWith','US_State','UK_Country','Age1stCode'
-                    'Country','CompFreq','DatabaseWanttoWorkWith','MiscTechHaveWorkedWith','ToolsTechHaveWorkedWith',
-                    'NEWCollabToolsWantToWorkWith','ToolsTechHaveWorkedWith','DatabaseHaveWorkedWith','MentalHealth']
+                    'Country','CompFreq','DatabaseWantToWorkWith','MiscTechHaveWorkedWith',
+                    'ToolsTechHaveWorkedWith', 'Currency','Age1stCode','LearnCode','MainBranch',
+                    'NEWCollabToolsWantToWorkWith','ToolsTechHaveWorkedWith',
+                    'DatabaseHaveWorkedWith','MentalHealth']
 
     #errors='ignore' since all columns are not in each df
     dfCleaned = (df.copy()
