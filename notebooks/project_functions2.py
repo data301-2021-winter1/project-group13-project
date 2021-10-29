@@ -4,7 +4,9 @@ import os
 def load_and_process(csv_file):
     df = pd.read_csv(csv_file)
     df1=(
-        df.dropna(subset=['EdLevel','Country','LearnCode','ConvertedCompYearly']) 
+        df.replace(["Less than 1 year"],"0")
+        .replace(["More than 50 years"],"50")
+        .dropna(subset=['EdLevel','Country','LearnCode','ConvertedCompYearly','YearsCodePro']) 
         .drop(['LanguageHaveWorkedWith', 'LanguageWantToWorkWith',
        'DatabaseHaveWorkedWith', 'DatabaseWantToWorkWith',
        'PlatformHaveWorkedWith', 'PlatformWantToWorkWith',
@@ -30,3 +32,4 @@ def show_Percentage(dfp, plt):
         x = p.get_x() + p.get_width() / 2
         y = p.get_height()
         plt.annotate(percentage, (x, y), ha='center', va='center')
+    return dfp
