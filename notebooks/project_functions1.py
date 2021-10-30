@@ -142,7 +142,7 @@ def testLangdf(df):
         str_row = str(row['ProgrammingLanguage'])
         list_row = str_row.split(";") #splitting by delimiter to separate languages
         for progLang in list_row:
-            if progLang not in ['Nan','NaN','NAN','nan'] and row['ConvertedCompYearly'] not in ['nan']:
+            if progLang not in ['Nan','NaN','NAN','nan'] and row['ConvertedCompYearly'] not in ['nan'] and progLang !='APL' and row['ConvertedCompYearly']<150000:
             #    dictLangSalary[progLang].append(row['ConvertedCompYearly'])
                  langSalArr.append([progLang,row['ConvertedCompYearly']])
 
