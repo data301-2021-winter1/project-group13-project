@@ -1,5 +1,6 @@
 import zipfile
 import pandas as pd
+import numpy as np
 import os # to get to document and open it
 from collections import Counter
 
@@ -120,6 +121,34 @@ def dfLangSalary(df,countObj):
 
     dfLangSalary = dfAdjustColNames(dictLangSalary)
     return dfLangSalary
+
+def testLangdf(df):
+    ''' Takes in dataframe and counter object produce a dataframe of programming language to salary
+        and returns a counter object
+        params
+        ------
+        df: dataframe
+        col: counter object
+
+        returns
+        -------
+        dataframe
+     '''
+     #Samle of what the dictionary looks like before being loaded with salaries
+     # dictLangSalary = {"C++":[],'APL':[],'Assembly':[],'Bash/Shell':[],'C':[],'C#':[],
+    #                 'COBOL':[],'Clojure'}
+    langSalArr = []
+    for index, row in df.iterrows():
+        str_row = str(row['ProgrammingLanguage'])
+        list_row = str_row.split(";") #splitting by delimiter to separate languages
+        for progLang in list_row:
+            if progLang not in ['Nan','NaN','NAN','nan'] and row['ConvertedCompYearly'] not in ['nan']:
+            #    dictLangSalary[progLang].append(row['ConvertedCompYearly'])
+                 langSalArr.append([progLang,row['ConvertedCompYearly']])
+
+    #dfLangSalary = dfAdjustColNames(dictLangSalary)
+    return langSalArr
+
 
 def dfLangCount(df, col):
     ''' Takes in dataframe and column to count in the dataframe and returns a counter object
